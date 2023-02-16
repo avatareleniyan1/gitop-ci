@@ -3,7 +3,7 @@
         "gitops-CI": {
             "isDefault": true,
             "runWith": "jenkins-master",
-            "name": "gitops-ci",
+            "name": "gitops-ci"
         }
     },
     "jenkins-runner.hostConfigs": {
@@ -11,7 +11,7 @@
             "url": "http://18.117.72.125:8080",
             "user": "admin",
             "password": "Securebios###",
-            "useCrumbIssuer": true,
+            "useCrumbIssuer": true
         }
     }
 }
