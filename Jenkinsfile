@@ -31,7 +31,7 @@ pipeline{
             steps{
                 script{
                     git credentialsId: 'githubtoken',
-                    url: 'https://github.com/avatareleniyan1/gitops-ci.git',
+                    url: 'https://github.com/avatareleniyan1/gitop-ci.git',
                     branch: 'main'
                 }
             }
