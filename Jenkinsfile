@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment{
         DOCKERHUB_USERNAME= "avatareleniyan1"
-        APP_NAME="gitop-ci"
+        APP_NAME="gitop"
         IMAGE_TAG="${BUILD_NUMBER}"
         IMAGE_NAME="${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
         REGISTRY_CREDS="dockerhubID"
@@ -30,8 +30,8 @@ pipeline{
         stage('Git Checkout SCM'){
             steps{
                 script{
-                    git credentialsId: 'githubtoken',
-                    url: 'https://github.com/avatareleniyan1/gitop-ci.git',
+                    git credentialsId: 'gitop',
+                    url: 'https://github.com/avatareleniyan1/gitop.git',
                     branch: 'main'
                 }
             }
