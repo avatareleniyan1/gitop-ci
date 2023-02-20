@@ -15,18 +15,18 @@ pipeline{
                 }
             }
         }
-   //     stage ('Check-Git-Secrets') {
-	//	    steps {
-    //            script{
-     //               sh 'trufflesecurity/trufflehog:latest || true'
-	//	            sh 'docker pull trufflesecurity/trufflehog:latest'
-     //               sh 'docker run -t -v "$PWD:/pwd" ghcr.io/trufflesecurity/trufflehog:latest github --repo  https://github.com/avatareleniyan1/gitop-ci.git --debug > trufflehog'
-	//	            sh 'cat trufflehog'
+        stage ('Check-Git-Secrets') {
+		    steps {
+                script{
+                    sh 'rm trufflesecurity/trufflehog:latest || true'
+		        //    sh 'docker pull trufflesecurity/trufflehog:latest'
+                    sh 'docker run --rm -t -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/avatareleniyan1/gitop-ci.git --debug > trufflehog'
+		            sh 'cat trufflehog'
 
-     //           }
+               }
 	         
-	  //     }
-     //   }
+	       }
+        }
         stage('Git Checkout SCM'){
             steps{
                 script{
