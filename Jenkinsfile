@@ -52,6 +52,13 @@ pipeline{
 		     sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
 		   }
 	   }
+       stage ('Network Mapper (Port Scan)') {
+		    steps {
+			sh 'rm nmap* || true'
+			sh 'docker run --rm -v "$(pwd)":/data uzyexe/nmap -sS -sV -oX nmap http://10.0.0.98:8080/'
+			sh 'cat nmap'
+		    }
+	    }
 
     }  
 }
