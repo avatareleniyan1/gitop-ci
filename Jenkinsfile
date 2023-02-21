@@ -59,6 +59,16 @@ pipeline{
 			sh 'cat nmap'
 		    }
 	    }
+        stage('Push Docker Image'){
+            steps{
+                script{
+                    docker.withRegistry('',REGISTRY_CREDS){
+                        docker_image.push("$BUIlD_NUMBER")
+                        docker_image.push('latest')
+                    }
+                }
+            }
+        }
 
     }  
 }
