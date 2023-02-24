@@ -77,6 +77,28 @@ pipeline{
                 }
             }
         }
+        stage('Updating Kubernetes Deployment File'){
+            steps{
+                script{
+                    sh """
+                    cat deployment.yml
+                    sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yml
+                    cat deployment.yml
+
+                    """
+                }
+            }
+        }
+        stage('Website Vulnerability Scanning (Nikto Scan)'){
+            steps{
+                script{
+                    sh 'rm nikto-output.xml || true'
+			        sh 'docker pull secfigo/nikto:latest'
+			        sh 'docker run --user $(id -u):$(id -g) --rm -v $(pwd):/report -i secfigo/nikto:latest -h http://10.0.0.98:8080/ -output /report/nikto-output.xml'
+			        sh 'cat nikto-output.xml'
+                }
+            }
+        }
 
     }  
 }
