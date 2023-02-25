@@ -107,6 +107,24 @@ pipeline{
                     }
 			    }
 			}
+            stage(' Push the Changed Deployment File Git '){
+            steps{
+                script{
+                    sh """
+                     git config --global user.name "avatareleniyan1"
+                     git config --global user.email shonubi.adekunle@gmail.com
+                     git add deployment.yml
+                     git commit -m "updated deployment.yml file"
+                    """
+                    withCredentials([gitUsernamePassword(credentialsId: 'gitop', gitToolName: 'Default')]) {
+
+                     sh "git push https://github.com/avatareleniyan1/gitop-ci.git main"
+
+                   }
+                   
+                }
+            }
+       }
 
     }  
 }
